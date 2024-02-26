@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
@@ -12,7 +12,7 @@ def get_google_sheet_data():
 
     # Open the Google Spreadsheet using its title
     spreadsheet = client.open('deep_funding_meeting_execl')
-    
+
     # Select the desired sheet
     sheet = spreadsheet.sheet1  # You may need to change this to the correct sheet
 
@@ -29,10 +29,9 @@ def get_google_sheet_data():
 
     return output
 
-@app.route('/api/get_sheet_data', methods=['GET'])
-def api_get_sheet_data():
-    data = get_google_sheet_data()
-    return jsonify({'data': data})
+@app.route('/')
+def home():
+    return 'Flask Vercel Example - Hello World', 200
 
 if __name__ == '__main__':
     app.run(debug=True)
